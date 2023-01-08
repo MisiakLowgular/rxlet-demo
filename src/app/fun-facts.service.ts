@@ -26,4 +26,12 @@ export class FunFactsService {
       this._subject.complete();
     }
   }
+
+  public forceError(): void {
+    this._subject.error('There was and error');
+  }
+
+  public reset(): void {
+    this._subject = new BehaviorSubject<number>(0);
+  }
 }

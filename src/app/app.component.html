@@ -4,22 +4,26 @@
     let funFact;
     let loading = suspense;
     suspenseTrigger: loadingTrigger$;
-    let finished = complete
+    let finished = complete;
+    let error = error
   "
 >
   <mat-card-header>
     <mat-card-title>Fun Facts</mat-card-title>
   </mat-card-header>
   <mat-card-content>
+    <p *ngIf="error">There was an error fetching next fun fact</p>
     <p>{{ loading ? "Loading..." : funFact }}</p>
   </mat-card-content>
   <mat-card-actions>
     <button
       mat-raised-button
-      [disabled]="loading || finished"
+      [disabled]="loading || finished || !!error"
       (click)="onNextClicked()"
     >
       Next
     </button>
+    <button mat-raised-button (click)="onErrorClicked()">Trigger error</button>
+    <button mat-raised-button (click)="onResetClicked()">Reset</button>
   </mat-card-actions>
 </mat-card>

@@ -18,4 +18,13 @@ export class AppComponent {
     this.loadingTrigger$.next();
     this._funFactsService.getNextFunFact();
   }
+
+  onErrorClicked(): void {
+    this._funFactsService.forceError();
+  }
+
+  onResetClicked(): void {
+    this._funFactsService.reset();
+    this.funFact$ = this._funFactsService.getFunFactsStream();
+  }
 }
