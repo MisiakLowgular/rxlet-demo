@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FunFactsService } from './fun-facts.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,10 @@ export class AppComponent {
 
   constructor(private readonly _funFactsService: FunFactsService) {}
 
+  loadingTrigger$: Subject<void> = new Subject<void>();
+
   onNextClicked(): void {
+    this.loadingTrigger$.next();
     this._funFactsService.getNextFunFact();
   }
 }

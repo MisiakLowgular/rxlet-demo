@@ -1,11 +1,25 @@
-<mat-card *rxLet="funFact$; let funFact">
+<mat-card
+  *rxLet="
+    funFact$;
+    let funFact;
+    let loading = suspense;
+    suspenseTrigger: loadingTrigger$;
+    let finished = complete
+  "
+>
   <mat-card-header>
     <mat-card-title>Fun Facts</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <p>{{ funFact }}</p>
+    <p>{{ loading ? "Loading..." : funFact }}</p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button (click)="onNextClicked()">Next</button>
+    <button
+      mat-raised-button
+      [disabled]="loading || finished"
+      (click)="onNextClicked()"
+    >
+      Next
+    </button>
   </mat-card-actions>
 </mat-card>
